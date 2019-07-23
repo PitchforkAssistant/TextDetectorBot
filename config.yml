@@ -1,0 +1,11 @@
+debug: true # Yes disables any actual actions and enables debug logging.
+subreddits:
+  - aww
+remove: true # Remove if contains text.
+report: false
+action_reason: >- # Set this to null or empty string to disable the removal reason.
+  Your submission contains the following text:
+  > {{text}}
+  Images with text are not allowed on /r/{{subreddit}}. **If you believe text was erroneously detected, reply to this comment or [message the moderators](https://www.reddit.com/message/compose?to=%2Fr%2F{{subreddit}}) for human review.**
+human_review: true # Whether the bot will monitor its inbox for replies to the removal reason.
+human_review_report: "OP has requested human review!"
