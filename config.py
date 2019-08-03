@@ -32,14 +32,6 @@ class Config:
         return self._config["debug"]
 
     @property
-    def subreddits(self):
-        return self._config["subreddits"]
-
-    @property
-    def multireddit(self):
-        return "+".join(self.subreddits)
-
-    @property
     def remove(self):
         return self._config["remove"]
 
