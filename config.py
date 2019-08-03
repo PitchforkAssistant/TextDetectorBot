@@ -36,12 +36,8 @@ class Config:
         return self._config["remove"]
 
     @property
-    def report(self):
-        return self._config["report"]
-
-    @property
-    def action_reason(self):
-        return self._config["action_reason"]
+    def removal_reason(self):
+        return self._config["removal_reason"]
 
     @property
     def human_review(self):
