@@ -25,7 +25,7 @@ class Config:
         file_handler.setFormatter(formatter)
         self.logger.addHandler(file_handler)
 
-        self.debug("Config and Logger loaded!")
+        self.logger.debug("Config and Logger loaded!")
 
     @property
     def debug(self):
