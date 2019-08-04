@@ -7,6 +7,6 @@ def DownloadImage(url):
         response = requests.get(url, stream=True)
         if response.status_code != 200:
             return None
-        image = image.open(response.raw).convert("RGB")
+        image = Image.open(response.raw).convert("RGB")
         return image
     return None

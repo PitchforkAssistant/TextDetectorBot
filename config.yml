@@ -1,8 +1,10 @@
-debug: true # Yes disables any actual actions and enables debug logging.
-remove: true # Remove if contains text.
-removal_reason: >- # Set this to null or empty string to disable the removal reason.
-  Hi /u/{user}! Images with text are not allowed on /r/{subreddit}, your post has been removed for containing the following text:
+debug: true
+remove: true
+removal_reason: |+
+  Hi /u/{username}! Images with text are not allowed on /r/{subreddit}, your post has been removed for containing the following text:
+  
   > {text}
-  **If you believe text was erroneously detected, reply to this comment or [message the moderators](https://www.reddit.com/message/compose?to=%2Fr%2F{subreddit}) for human review.**
+  
+  *If you believe text was erroneously detected, reply to this comment or [message the moderators](https://www.reddit.com/message/compose?to=%2Fr%2F{subreddit}) for human review.*
 human_review: true # Whether the bot will monitor its inbox for replies to the removal reason.
 human_review_report: "/u/{username} has disputed this automatic removal. Double check the image for text!"
