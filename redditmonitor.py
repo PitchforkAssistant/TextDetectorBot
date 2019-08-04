@@ -52,6 +52,7 @@ class RedditMonitor:
                 continue
             image = imagedownloader.DownloadImage(post.url)
             if image is None:
+                self.config.logger.debug("No image returned for " + post.url)
                 continue
             textdetector = TextDetector(image)
             if not textdetector.has_text():
