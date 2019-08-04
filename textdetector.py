@@ -15,7 +15,7 @@ class TextDetector:
                  image,
                  counted_characters=string.ascii_letters+string.digits,
                  minimum_confidence=80,
-                 minimum_chars=1,
+                 minimum_chars=2,
                  minimum_count=3):
         self.image = image
         self.counted_characters = counted_characters
