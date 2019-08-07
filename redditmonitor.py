@@ -1,5 +1,6 @@
 import threading
 from sys import exit
+from time import sleep
 
 import praw
 
@@ -14,17 +15,28 @@ class RedditMonitor:
         self.config = config
         self.reddit = praw.Reddit()
 
-    def start_thread(self, target):
-        thread = threading.Thread(target=target)
+    def _safe_thread(self, target):
+        while True:
+            try:
+                target()
+            except:
+                self.config.logger.exception("Error occured in safe thread!")
+            sleep(30)
+
+    # Safe as in just logs exceptions and restarts
+    # (won't crash when reddit goes down, etc)
+    def start_safe_thread(self, target):
+        thread = threading.Thread(target=self._safe_thread,
+                                  kwargs={'target': target})
         thread.start()
         return thread
 
     def start_monitors(self):
         self.config.logger.debug("Starting monitors!")
         if self.config.remove:
-            self.posts_thread = self.start_thread(self.posts_monitor_loop)
+            self.posts_thread = self.start_safe_thread(self.posts_monitor_loop)
         if self.config.human_review:
-            self.inbox_thread = self.start_thread(self.inbox_monitor_loop)
+            self.inbox_thread = self.start_safe_thread(self.inbox_monitor_loop)
         self.config.logger.debug("Monitors started!")
 
     def inbox_monitor_loop(self):
@@ -47,9 +59,9 @@ class RedditMonitor:
         self.config.logger.debug("Inbox monitor loop has ended!")
 
     def posts_monitor_loop(self):
-        subreddit = self.reddit.subreddit("mod")
-        for post in subreddit.stream.submissions():
-            try:
+        try:
+            subreddit = self.reddit.subreddit("mod")
+            for post in subreddit.stream.submissions():
                 self.config.logger.debug("New post: " + post.permalink)
                 if post.is_self or post.approved:
                     continue
@@ -72,8 +84,8 @@ class RedditMonitor:
                 reply = post.reply(reason)
                 reply.mod.distinguish(sticky=True)
                 self.config.logger.debug(post.permalink + " has been removed!")
-            except:
-                # I'm catching all exceptions and logging them, most likely,
-                # something went wrong with processing/downloading the image.
-                self.config.logger.exception(
-                    "Exception in posts_monitor_loop:")
+        except:
+            # I'm catching all exceptions and logging them, most likely,
+            # something went wrong with processing/downloading the image.
+            self.config.logger.exception(
+                "Exception in posts_monitor_loop:")
