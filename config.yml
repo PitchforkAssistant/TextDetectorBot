@@ -5,6 +5,6 @@ removal_reason: |+
   
   > {text}
   
-  *If you believe text was erroneously detected, reply to this comment or [message the moderators](https://www.reddit.com/message/compose?to=%2Fr%2F{subreddit}) for human review.*
+  *If you believe text was erroneously detected, reply to this comment or [message the moderators with a link to this post](https://www.reddit.com/message/compose?to=%2Fr%2F{subreddit}&message=I%20believe%20my%20post%20was%20erroneously%20removed%20for%20containing%20text%2C%20could%20you%20please%20approve%20it%3A%20http%3A%2F%2Fredd.it%2F{post_id}) for human review.*
 human_review: true # Whether the bot will monitor its inbox for replies to the removal reason.
 human_review_report: "/u/{username} has disputed this automatic removal. Double check the image for text!"

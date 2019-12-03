@@ -80,6 +80,7 @@ class RedditMonitor:
             reason = str(self.config.removal_reason).format(
                 username=post.author.name,
                 subreddit=post.subreddit.display_name,
+                post_id=post.id,
                 text=", ".join(textdetector.get_text()))
             reply = post.reply(reason)
             reply.mod.distinguish(sticky=True)
