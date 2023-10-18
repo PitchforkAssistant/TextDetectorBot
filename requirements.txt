@@ -23,7 +23,7 @@ rope==0.11.0
 simplejson==3.16.0
 six==1.11.0
 update-checker==0.16
-urllib3==1.26.17
+urllib3==1.26.18
 websocket-client==0.56.0
 wrapt==1.10.11
 yarg==0.1.9
